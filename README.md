@@ -1,73 +1,213 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Odoo eCommerce and JWT Authentication Integration in NestJS with Odoo ERP 17.0
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Overview
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This application integrates Odoo’s eCommerce functionalities with NestJS through external APIs, utilizing Odoo ERP 17.0. The integration allows seamless management of key business operations, including product listings, order processing, and cart management, by tapping into Odoo’s robust eCommerce capabilities.
 
-## Description
+To secure sensitive operations, the application incorporates JWT (JSON Web Token) authentication. This ensures that only authorized users can access protected routes, such as adding products to the cart, viewing orders, and updating cart items, providing a secure environment for eCommerce transactions.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+By leveraging Odoo's external APIs for eCommerce features, users benefit from the full capabilities of Odoo ERP, while the system remains protected with token-based authentication to ensure both security and efficiency in the online store management.
 
-## Installation
+- **Odoo Instance**: [https://arsalanweb.odoo.com/](https://arsalanweb.odoo.com/)
+- **Odoo Documentation**: [https://www.odoo.com/documentation/17.0/](https://www.odoo.com/documentation/17.0/)
+- **Repository Clone Link**: [https://github.com/alaparsalan/odoo-erp-nest-shop](https://github.com/alaparsalan/odoo-erp-nest-shop)
 
-```bash
-$ npm install
+## Features
+
+- **JWT Authentication**: Secure routes with token-based authentication.
+- **XML-RPC Integration**: Seamless communication between the NestJS application and Odoo ERP 17.0 for eCommerce management.
+- **Basic eCommerce Features**:
+  - Add products to the cart
+  - View cart products
+  - Update cart products
+  - Remove products from the cart
+  - View all products
+  - View customer orders
+- **Security Enhancements**: Strengthening application security through secure authentication practices.
+
+## Technology Stack
+
+- **NestJS**: A progressive Node.js framework for building efficient, reliable, and scalable server-side applications.
+- **Odoo ERP 17.0**: Open-source business application suite for managing various business operations like sales, inventory, accounting, and more.
+- **JWT (JSON Web Tokens)**: For securing API routes.
+- **XML-RPC**: For integrating Odoo ERP with the NestJS application.
+
+## Setup and Installation
+
+Follow these steps to set up the application locally:
+
+### Prerequisites
+
+- Node.js (v16 or later)
+- NPM (or Yarn)
+- Odoo ERP 17.0 instance
+- Odoo XML-RPC library
+
+### 1. Clone the repository
+
+``` bash
+git clone https://github.com/alaparsalan/odoo-erp-nest-shop.git
+cd odoo-erp-nest-shop
 ```
 
-## Running the app
+### 2. Install dependencies
 
-```bash
-# development
-$ npm run start
+Run the following command to install the necessary dependencies for the project:
 
-# watch mode
-$ npm run start:dev
+``` bash
+npm install
 
-# production mode
-$ npm run start:prod
+```
+### 3. Configure environment variables
+
+Create a `.env` file in the root directory of the project and add the necessary environment variables:
+
+``` .env
+ODOO_URL=https://arsalanweb.odoo.com
+ODOO_DB=<your_odoo_db_name>
+ODOO_USERNAME=<your_odoo_username>
+ODOO_PASSWORD=<your_odoo_password>
+JWT_SECRET=<your_jwt_secret_key>
+
 ```
 
-## Test
+Make sure to replace the placeholders with your actual Odoo instance details and JWT secret key.
 
-```bash
-# unit tests
-$ npm run test
+### 4. Run the application
 
-# e2e tests
-$ npm run test:e2e
+Start the NestJS application locally:
 
-# test coverage
-$ npm run test:cov
+``` bash
+npm run start:dev
+
+```
+This will start the server on `http://localhost:3000`.
+
+### 5. Access the application
+
+- Navigate to `http://localhost:3000` to access the eCommerce functionality.
+- Use Postman or any API testing tool to test the JWT-secured routes.
+
+---
+
+## API Endpoints
+
+### 1. **Sign Up**
+
+- **POST** `http://localhost:3000/auth/register`
+
+**Request Body**:
+
+``` json
+{
+  "name": "<your_name>",
+  "password": "<your_password>",
+  "new_password": "<new_password>",
+  "email": "<your_email>"
+}
+
+```
+### 2. **Login**
+
+- **POST** `http://localhost:3000/auth/signin`
+
+**Request Body**:
+
+``` json
+{
+  "email": "<your_email>",
+  "password": "<your_password>"
+}
 ```
 
-## Support
+### 3. **View All Carts**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **GET** `http://localhost:3000/cart/products`
 
-## Stay in touch
+### 4. **View Cart by Partner ID**
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- **GET** `http://localhost:3000/cart/:partnerId`
+
+### 5. **Add to Cart**
+
+- **POST** `http://localhost:3000/cart/addtocart`
+
+**Request Body**:
+
+``` json
+{
+  "partnerId": <partner_id>,
+  "productId": <product_id>,
+  "quantity": <quantity>
+}
+
+```
+### 6. **Update Cart**
+
+- **PUT** `http://localhost:3000/cart/updatecart`
+
+**Request Body**:
+
+``` json
+{
+  "partnerId": <partner_id>,
+  "cartId": <cart_id>,
+  "qty": <quantity>
+}
+
+```
+### 7. **Delete Cart Item**
+
+- **DELETE** `http://localhost:3000/cart/removeitem`
+
+**Request Body**:
+
+``` json
+{
+  "cartId": <cart_id>
+}
+
+```
+### 8. **View All Orders**
+
+- **GET** `http://localhost:3000/orders/fetch`
+
+### 9. **Fetch All Products**
+
+- **GET** `http://localhost:3000/products/fetch?limit=1&offset=0`
+
+**Query Parameters**:
+- `limit`: Number of products to fetch.
+- `offset`: Starting point for pagination.
+
+---
+
+## Securing Routes with JWT
+
+Ensure that any route requiring authentication has the JWT token in the `Authorization` header. The format should be:
+
+#bash
+Authorization: Bearer <jwt_token>
+
+
+## Additional Resources
+
+- [NestJS Documentation](https://docs.nestjs.com/)
+- [Odoo ERP 17.0 Documentation](https://www.odoo.com/documentation/17.0/)
+
+## Contributing
+
+We welcome contributions to this project! If you'd like to contribute, feel free to fork the repository, submit pull requests, or open issues.
+
+### Steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add new feature'`).
+5. Push to the branch (`git push origin feature/your-feature`).
+6. Create a new pull request.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
