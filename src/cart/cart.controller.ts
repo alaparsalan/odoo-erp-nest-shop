@@ -17,7 +17,7 @@ export class CartController {
     @UseGuards(AuthGuard("jwt"))
     @Get('/:partnerId')
     getCart(@Param() params: partnerIdDto) {
-        let id = params.partnerId;
+        const id = params.partnerId;
         return this.cartService.fetchCart(id);
     }
 
@@ -29,13 +29,13 @@ export class CartController {
     @UseGuards(AuthGuard("jwt"))
     @Put('/updatecart')
     updateCart(@Body() updateData) {
-        let { cartId, qty } = updateData;
+        const { cartId, qty } = updateData;
         return this.cartService.updateItemInCart(cartId, qty);
     }
     @UseGuards(AuthGuard("jwt"))
     @Delete('/removeitem')
     removeCart(@Body() removeCartId) {
-        let { cartId } = removeCartId;
+        const { cartId } = removeCartId;
         return this.cartService.removeItemFromCart(cartId);
     }
 

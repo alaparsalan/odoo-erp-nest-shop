@@ -118,15 +118,15 @@ export class AuthenticationService {
 
     async signIn(data) {
         try {
-            let userid = await this.authenticateUser(data);
-            let partnerId = await this.serarchPartnerId(data);
+            const userid = await this.authenticateUser(data);
+            const partnerId = await this.serarchPartnerId(data);
 
             const payload = {
                 customer_user_id: userid,
                 partner_user_id: partnerId,
             }
-            console.log("Payload: ", payload);  
-            
+            console.log("Payload: ", payload);
+
 
             const accessToken = this.jwtService.sign(payload);
             const msg = {
