@@ -11,13 +11,13 @@ export class AuthenticationController {
 
     @Post('/register')
     registerUser(@Body() body: signUpDTO) {
-        let data = body;
+        const data = body;
         return this.authService.register(data);
     }
 
     @Post('/signin')
     userSignIn(@Body() body: signInDTO) {
-        let data = body;
+        const data = body;
         return this.authService.signIn(data);
     }
 

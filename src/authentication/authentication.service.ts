@@ -8,6 +8,7 @@ import { mergeScan } from 'rxjs';
 import { MESSAGES } from '@nestjs/core/constants';
 import { error } from 'console';
 import { rejects } from 'assert';
+import * as xmlrpc from 'xmlrpc';
 
 
 @Injectable()
@@ -77,15 +78,23 @@ export class AuthenticationService {
         if (!this.databaseService) {
             return "Error"
         }
-
-        let params = [process.env.ODOO_DB, data.email, data.password, {}]
         return new Promise((resolve, reject) => {
-            this.databaseService.getConnection().execute_kw('res.users', 'authenticate', [params], function (err, value) {
+            const common = xmlrpc.createClient({
+                url: `${process.env.ODOO_URL}/xmlrpc/2/common`,
+            });
+            common.methodCall('authenticate', [process.env.ODOO_DB, data.email, data.password, {}], (err, value) => {
+
                 if (err) {
                     console.log("Error: authenticate user", err)
                     reject(err)
                 }
-                resolve(value);
+                console.log("User ID: ", value);
+                if (value !== false) {
+                    resolve(value);
+                }
+                else {
+                    reject("Email or Password is invalid");
+                }
             });
         })
     }
@@ -109,15 +118,15 @@ export class AuthenticationService {
 
     async signIn(data) {
         try {
-            let userid = await this.authenticateUser(data);
-            let partnerId = await this.serarchPartnerId(data);
+            const userid = await this.authenticateUser(data);
+            const partnerId = await this.serarchPartnerId(data);
 
             const payload = {
                 customer_user_id: userid,
                 partner_user_id: partnerId,
             }
-            console.log("Payload: ", payload);  
-            
+            console.log("Payload: ", payload);
+
 
             const accessToken = this.jwtService.sign(payload);
             const msg = {
